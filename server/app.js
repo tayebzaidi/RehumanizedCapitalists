@@ -2,6 +2,7 @@ console.log("Deloying EatEasy server...");
 
 //Load Dependencies
 var http 	= require('http');
+var url = require('url');
 var fs = require('fs');
 var util = require('util');
 
@@ -32,5 +33,9 @@ function handleFileRequest(req, res) {
 }
 
 function handleApiRequest(req, res) {
-	
+	if(req.method == "GET") {
+		var url_parts = url.parse(req.url, true);
+		var query = url_parts.query;
+		console.log(query);
+	}
 }
