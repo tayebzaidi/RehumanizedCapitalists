@@ -81,6 +81,14 @@
 }
 
 .restriction{
+	#style1{
+		background: #82b440;
+		color: white;
+	}
+	#style2{
+		background: #24992e;
+		color: white;
+	}
 	width: 100%;
 	height: 11%;
 	position: relative;
@@ -113,7 +121,8 @@
 }
 
 .active-check-circle{
-	background: #82b440;
+	/*background: #82b440;*/
+	color: #82b440;
 }
 
 /*Sidebars*/
@@ -181,3 +190,4 @@
 	border: 2px solid #82b440;
 }
 
+>>>>>>> 5527f81bd817ff01210cce5e46ec4f7e5e0c3461
