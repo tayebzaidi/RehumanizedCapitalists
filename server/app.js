@@ -42,7 +42,7 @@ function handleApiRequest(req, res) {
 			replyMissingRecipe(res);
 			return;
 		}
-		requestRecipes(query.recipe, function(recipes) {
+		requestRecipes(query.recipe, query.healthReqs, function(recipes) {
 			console.log(recipes);
 			var recipeList = [];
 			var calorieCount = [];
