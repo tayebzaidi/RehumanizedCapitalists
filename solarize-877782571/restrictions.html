@@ -2,13 +2,14 @@
 
 <html>
 	<head>
-		<title>DietaryRestrictions</title>
+		<title>Dietary Restrictions</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<script src="js/jquery.min.js"></script>
 		<script src="js/jquery.dropotron.min.js"></script>
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
+		<script src="js/restrictions.js"></script>
 		<link rel="stylesheet" href="css/skel.css"/>
 		<link rel="stylesheet" href="css/style.css"/>
 		<link rel="stylesheet" href="css/ourstyle.css"/>
@@ -27,58 +28,143 @@
 			</div>
 		</div>
 		
-		<div class="restrictions" style="text-align:center; color:black">
-			<h2>Please select any dietary preferences/restrictions you have:</h2>
-			<form>
-	            <div class="row">
-					<div class="col-lg-6">
-						<div class="leftCheckbox">
-							<label>Vegetarian  <input type="checkbox" value="Vegetarian" name="Vegetarian"> </label>
-						</div>
+		<div class="restriction-holder">
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-2">
 					</div>
-					<div class="col-lg-6">
-						<div class="rightCheckbox">
-							<label><input type="checkbox" value="Vegan" name="Vegan"> Vegan</label>
+					<div class="col-lg-8">
+						<h1>Please select your dietary restrictions:</h1>
+					</div>
+					<div class="col-lg-2">
+					</div>
+				</div>
+			</div>
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-4">
+					</div>
+					<div class="col-lg-4">
+						<h2>Vegetarian</h2>
+					</div>
+					<div class="col-lg-4">
+						<div class="check-circle" id="vegetarian">
+							<span class="glyphicon glyphicon-ok" id="checkmark"/>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="leftCheckbox">
-							<label>Gluten Free  <input type="checkbox" value="Gluten Free" name="Gluten Free">  </label>
-						</div>
+			</div>
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-4">
 					</div>
-					<div class="col-lg-6">
-						<div class="rightCheckbox">
-							<label><input type="checkbox" value="Dairy Free" name="Dairy Free"> Dairy Free</label>
-						</div>
+					<div class="col-lg-4">
+						<h2>Vegan</h2>
 					</div>
+					<div class="col-lg-4">
+						<div class="check-circle" id="vegan">
+							<span class="glyphicon glyphicon-ok" id="checkmark"/>
+						</div>
+					</div>			
 				</div>
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="leftCheckbox">
-							<label>Low Sodium   <input type="checkbox" value="Low Sodium" name="Low Sodium"> </label>
-						</div>
+			</div>
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-4">
 					</div>
-					<div class="col-lg-6">
-						<div class="rightCheckbox">
-							<label><input type="checkbox" value="Low Fat" name="Low Fat"> Low Fat</label>
-						</div>
+					<div class="col-lg-4">
+						<h2>Gluten-Free</h2>
 					</div>
+					<div class="col-lg-4">
+						<div class="check-circle" id="gluten-free">
+							<span class="glyphicon glyphicon-ok" id="checkmark"/>
+						</div>
+					</div>			
 				</div>
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="leftCheckbox">
-							<label>High Fiber   <input type="checkbox" value="High Fiber" name="High Fiber"> </label>
-						</div>
+			</div>
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-4">
 					</div>
-					<div class="col-lg-6">
-						<div class="rightCheckbox">
-							<label><input type="checkbox" value="No Nuts" name="No Nuts"> No Nuts</label>
-						</div>
+					<div class="col-lg-4">
+						<h2>Peanut Free</h2>
 					</div>
-				</div>	
-			</form>
-			<button href="recipes.html">Continue to next step!</button>
+					<div class="col-lg-4">
+						<div class="check-circle" id="peanut-free">
+							<span class="glyphicon glyphicon-ok" id="checkmark"/>
+						</div>
+					</div>			
+				</div>
+			</div>
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-4">
+					</div>
+					<div class="col-lg-4">
+						<h2>Soy-Free</h2>
+					</div>
+					<div class="col-lg-4">
+						<div class="check-circle" id="soy-free">
+							<span class="glyphicon glyphicon-ok"/>
+						</div>
+					</div>			
+				</div>
+			</div>
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-4">
+					</div>
+					<div class="col-lg-4">
+						<h2>Wheat-Free</h2>
+					</div>
+					<div class="col-lg-4">
+						<div class="check-circle" id="wheat-free">
+							<span class="glyphicon glyphicon-ok"/>
+						</div>
+					</div>			
+				</div>
+			</div>
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-4">
+					</div>
+					<div class="col-lg-4">
+						<h2>Fish-Free</h2>
+					</div>
+					<div class="col-lg-4">
+						<div class="check-circle" id="fish-free">
+							<span class="glyphicon glyphicon-ok"/>
+						</div>
+					</div>			
+				</div>
+			</div>
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-4">
+					</div>
+					<div class="col-lg-4">
+						<h2>Low Sugar</h2>
+					</div>
+					<div class="col-lg-4">
+						<div class="check-circle" id="low-sugar">
+							<span class="glyphicon glyphicon-ok"/>
+						</div>
+					</div>			
+				</div>
+			</div>
+			<div class="restriction">
+				<div class="col-lg-12">
+					<div class="col-lg-4">
+					</div>
+					<div class="col-lg-4">
+						<h2>Egg-Free</h2>
+					</div>
+					<div class="col-lg-4">
+						<div class="check-circle" id="egg-free">
+							<span class="glyphicon glyphicon-ok"/>
+						</div>
+					</div>			
+				</div>
+			</div>
 		</div>
 	</body>
