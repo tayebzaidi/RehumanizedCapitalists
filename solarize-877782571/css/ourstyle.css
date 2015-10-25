@@ -1,0 +1,22 @@
+.restrictions{
+	width: auto;
+	height: auto;
+	#background: white;
+	margin-top: 5%;
+	padding-top: 5px;
+	text-align: center;
+	border: 2px solid black;
+}
+
+.leftCheckbox{
+    float: right;
+}
+
+.rightCheckbox{
+    float: left;
+}
+
+.footer{
+	background: #222222;
+	height:100%;
+}
