@@ -34,15 +34,45 @@
 	position: relative;
 	text-align: center;
 	border-bottom: 3px solid black;
-	
+	cursor: pointer;
 }
-	.recipe.style1{
-		background: #222222;
+	#style1{
+		background: #82b440;
+		color: white;
 	}
-	.recipe.style2{
+	#style2{
 		background: white;
 	}
-	.recipe h2{
+	.recipeName{
 		float: left;
 	}
+	.calories{
+		float: left;
+	}
+	.price{
+		float: right;
+	}
 
+.arrow{
+	padding-top: 4px;
+	height: 100%;
+	float: right;
+	font-size: 50px;
+	cursor: pointer;
+}
+
+.activeRecipe{
+	background: #222222 !important;
+}
+
+.activeArrow{
+	color: blue;
+}
+
+.seeMore{
+	width: 50px;
+	height: 10px;
+	display: none;
+	float: right;
+	padding-top: 10px;
+}
