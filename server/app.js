@@ -16,28 +16,45 @@ function requestHandler(req, res) {
 	handleApiRequest(req, res);
 }
 
-function handleFileRequest(req, res) {
-	var filename = "404.html";
-	fs.readFile(filename, function(err, data) {
-		if(!err) {
-			res.end(data);
-		} else {
-			console.log("Error reading file: " + err);
-			res.end();
-		}
-	})
-}
-
 function handleApiRequest(req, res) {
 	console.log("Made it to API Request Handler!")
 	if(req.method == "GET") {
 		var url_parts = url.parse(req.url, true);
 		var query = url_parts.query;
-<<<<<<< HEAD
-	 	console.log(query);
-=======
 		console.log(query);
-		res.end()
->>>>>>> 61dd2705e87a2a9673674a09ed23f95de027349e
+		if(query.recipe == undefined) {
+			replyMissingRecipe(res);
+			return;
+		}
+		requestRecipes(req, res, query);
+	} else {
+		replyPostNotSupported(res);
 	}
+}
+
+function requestRecipes(req, res, recipe, callback) {
+	var parameters = '?q="chicken duck';
+	var options = {
+		host : 'www.thehostwebsite.com', 
+		path : '/apidoodle/' + parameters, 
+		method : 'GET'
+	};
+	
+	http.request(options, function(response) {
+		
+	});
+}
+
+
+function replyMissingRecipe(res) {
+	res.writeHead(400, {'Content-Type' : 'text/json'});
+	res.end('{"message" : "no recipe given"}');
+}
+function replyTestSuccess(res) {
+	res.writeHead(200, {'Content-Type' : 'text/json'});
+	res.end('{"message" : "thank you for the request"}');
+}
+function replyPostNotSupported(res) {
+	res.writeHead(405, {'Content-Type' : 'text/json'});
+	res.end('{"message":"POST not supported"}');
 }
