@@ -37,12 +37,11 @@ function requestHandler(req, res) {
 function handleApiRequest(req, res) {
 	console.log("Made it to API Request Handler!")
 	if(req.method == "GET") {
-<<<<<<< HEAD
 		if(query.random == undefined || query.random == false) {
 			var url_parts = url.parse(req.url, true);
 			var query = url_parts.query;
 			console.log(query);
-			if(query.recipe == undefined) {
+			if(query.recipe == undefined || query.healthReqs == undefined) {
 				replyMissingRecipe(res);
 				return;
 			}
@@ -53,11 +52,14 @@ function handleApiRequest(req, res) {
 				for(var i = 0; i < recipes.hits.length; i += 1) {
 					var individualRecipe = recipes.hits[i];
 					var recipeInfo = individualRecipe.recipe.label;
-					calorieCount.push(individualRecipe.calorie)
+					calorieCount.push(individualRecipe.recipe.calories);
 					recipeList.push(recipeInfo);
 					
 				};
 				console.log(recipeList);
+				console.log(calorieCount);
+				
+				
 				res.end(JSON.stringify(recipes));
 			});
 		} else {
@@ -73,32 +75,6 @@ function handleApiRequest(req, res) {
 				return;
 			}
 		}
-=======
-		var url_parts = url.parse(req.url, true);
-		var query = url_parts.query;
-		console.log(query);
-		if(query.recipe == undefined || query.healthReqs == undefined) {
-			replyMissingRecipe(res);
-			return;
-		}
-		requestRecipes(query.recipe, function(recipes) {
-			console.log(recipes);
-			var recipeList = [];
-			var calorieCount = [];
-			for(var i = 0; i < recipes.hits.length; i += 1) {
-				var individualRecipe = recipes.hits[i];
-				var recipeInfo = individualRecipe.recipe.label;
-				calorieCount.push(individualRecipe.recipe.calories);
-				recipeList.push(recipeInfo);
-				
-			};
-			console.log(recipeList);
-			console.log(calorieCount);
-			
-			
-			res.end(JSON.stringify(recipes));
-		});
->>>>>>> c0d44c90e94c17885aa057211bfd42ba0ec2b1fd
 	} else {
 		replyPostNotSupported(res);
 	}
