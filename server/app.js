@@ -26,6 +26,8 @@ function populateExampleItemLists() {
 }
 
 
+
+
 //Main Request Handler
 function requestHandler(req, res) {
 	console.log("Request recieved.");
@@ -37,35 +39,65 @@ function handleApiRequest(req, res) {
 	if(req.method == "GET") {
 		var url_parts = url.parse(req.url, true);
 		var query = url_parts.query;
-		console.log(query);
-		if(query.recipe == undefined) {
-			replyMissingRecipe(res);
-			return;
+		if(query.random == undefined || query.random == false) {
+			recipeProvided(req, res, query);
+		} else {
+			recipeNotProvided(req, res, query);
 		}
-		requestRecipes(query.recipe, function(recipes) {
-			console.log(recipes);
-			var recipeList = [];
-			var calorieCount = [];
-			for(var i = 0; i < recipes.hits.length; i += 1) {
-				var individualRecipe = recipes.hits[i];
-				var recipeInfo = individualRecipe.recipe.label;
-				calorieCount.push(individualRecipe.calorie)
-				recipeList.push(recipeInfo);
-				
-			};
-			console.log(recipeList);
-			res.end(JSON.stringify(recipes));
-		});
 	} else {
 		replyPostNotSupported(res);
 	}
 }
 
-function requestRecipes(recipe, callback) {
+function recipeProvided(req, res, query) {
+	if(query.recipe == undefined || query.healthReqs == undefined) {
+		replyMissingRecipe(res);
+		return;
+	}
+	requestRecipes(query.recipe, function(recipes) {
+		console.log(recipes);
+		var recipeList = [];
+		var calorieCount = [];
+		for(var i = 0; i < recipes.hits.length; i += 1) {
+			var individualRecipe = recipes.hits[i];
+			var recipeInfo = individualRecipe.recipe.label;
+			calorieCount.push(individualRecipe.recipe.calories);
+			recipeList.push(recipeInfo);
+			
+		};
+		console.log(recipeList);
+		console.log(calorieCount);
+		
+		
+		res.end(JSON.stringify(recipes));
+	});
+}
+
+function recipeNotProvided(req, res, query) {
+	var random = query.random;
+	if(random == "breakfast" || random == 0) {
+		
+	} else if(random == "dinner" || random == 1) {
+		
+	} else if(random == "dessert" || random == 2) {
+		
+	} else {
+		replyInvalidRandom(res);
+		return;
+	}
+}
+
+function requestRecipes(recipe, healthReqs ,callback) {
 	console.log(recipe);
 	console.log(typeof(recipe));
-	
+	var numReqs = healthReqs.length;
+	var craftQuery = '';
+	for(var i = 0; i < numReqs; i += 1) {
+		craftQuery += '&health=' + healthReqs[i] 
+	};
+	console.log(craftQuery);
 	var parameters = util.format("?q=%s", recipe);
+	
 	var encParameters = encodeURI(parameters);
 	console.log(encParameters);
 	var options = {
@@ -112,4 +144,8 @@ function replyTestSuccess(res) {
 function replyPostNotSupported(res) {
 	res.writeHead(405, {'Content-Type' : 'text/json'});
 	res.end('{"message":"POST not supported"}');
+}
+function replyInvalidRandom(res) {
+	res.writeHead(400, {'Content-Type' : 'text/json'});
+	res.end('{"message" : "invalid random meal"}');
 }
