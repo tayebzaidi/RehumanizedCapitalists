@@ -12,6 +12,24 @@
 		<script src="js/jquery-small.js"></script>
 		<script src="js/recipes.js"></script>
 		<script language="javascript">
+                    
+                    function replaceAll(find, replace, str) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+                        function getUrlVars() {
+                            var vars = {};
+                            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                            vars[key] = value;
+                            });
+                            return vars;
+                        }
+                        
+                        var url = window.location.href;
+                        var index = url.indexOf("health=") + "health=".length;
+                        console.log(replaceAll('%22','"', url.substring(index, url.length)));
+                        var healthRestrictions = JSON.parse(replaceAll('%22','"', url.substring(index, url.length)));
+                        console.log(urlVars);
+                        
 			var ingredients = [];
 			function formResults(){
 				var ingredientSpace = document.getElementById("ingredientSpace");
@@ -20,6 +38,12 @@
 				ingredientSpace.innerHTML += "<div>" + ingredient.value + "</div>";
 				document.getElementById("ingredientInputBox").value = "";
 			}
+                        
+                        function next() {
+                            var url = "recipe.html?" + "health=" + JSON.stringify(healthRestrictions) +  "&" + JSON.stringify(ingredients);
+                            console.log(url);
+                            document.location.href = url;
+                        }
 		</script>
 		<link rel="stylesheet" href="css/ourstyle.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
