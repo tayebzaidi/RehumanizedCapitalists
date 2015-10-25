@@ -13,11 +13,7 @@ console.log("Server Deployed.");
 //Main Request Handler
 function requestHandler(req, res) {
 	console.log("Request recieved.");
-	if(req.url == '/api') {
-		handleApiRequest(req, res);
-	} else {
-		handleFileRequest(req, res);
-	}
+	handleApiRequest(req, res);
 }
 
 function handleFileRequest(req, res) {
@@ -33,9 +29,11 @@ function handleFileRequest(req, res) {
 }
 
 function handleApiRequest(req, res) {
+	console.log("Made it to API Request Handler!")
 	if(req.method == "GET") {
 		var url_parts = url.parse(req.url, true);
 		var query = url_parts.query;
 		console.log(query);
+		res.end()
 	}
 }
