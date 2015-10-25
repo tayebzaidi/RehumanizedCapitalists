@@ -33,11 +33,14 @@ function handleApiRequest(req, res) {
 			for(var i = 0; i < recipes.hits.length; i += 1) {
 				var individualRecipe = recipes.hits[i];
 				var recipeInfo = individualRecipe.recipe.label;
-				calorieCount.push(individualRecipe.calorie)
+				calorieCount.push(individualRecipe.recipe.calories);
 				recipeList.push(recipeInfo);
 				
 			};
 			console.log(recipeList);
+			console.log(calorieCount);
+			
+			
 			res.end(JSON.stringify(recipes));
 		});
 	} else {
@@ -45,11 +48,16 @@ function handleApiRequest(req, res) {
 	}
 }
 
-function requestRecipes(recipe, callback) {
+function requestRecipes(recipe, healthReqs ,callback) {
 	console.log(recipe);
 	console.log(typeof(recipe));
-	
+	var numReqs = healthReqs.length;
+	var craftQuery = 
+	for(var i = 0; i < numReqs; i += 1) {
+		
+	};
 	var parameters = util.format("?q=%s", recipe);
+	
 	var encParameters = encodeURI(parameters);
 	console.log(encParameters);
 	var options = {
