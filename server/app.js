@@ -27,7 +27,7 @@ function handleApiRequest(req, res) {
 			return;
 		}
 		requestRecipes(query.recipe, function(recipes) {
-			
+			res.end(recipes);
 		});
 	} else {
 		replyPostNotSupported(res);
@@ -35,17 +35,33 @@ function handleApiRequest(req, res) {
 }
 
 function requestRecipes(recipe, callback) {
-	var parameters = util.format("?q='%s'&app_id=e830aa3b&"
+	var parameters = util.format("?q=%s&app_id=e830aa3b&"
 			+ "app_key=85d44bf24c3f5eaf6248a92872b0e6d6", recipe);
 	var options = {
-		host : 'https://api.edamam.com', 
+		host : 'api.edamam.com', 
 		path : '/search' + parameters, 
 		method : 'GET'
 	};
 	
-	var req = http.request(options, function(response) {
-		
+	var req = http.request(options, function(res) {
+		console.log("STATUS: " + res.statusCode);
+		console.log("HEADERS: " + JSON.stringify(res.headers));
+		var recipes
+		res.on("data", function(chunk) {
+			recipes += chunk;
+		});
+		res.on("end", function(chunk) {
+			callback(recipes);
+		});
+		//callback("Dog");
 	});
+	
+	req.on("error", function(chunk) {
+		return "error";
+	});
+	
+	console.log("Ending request for data...");
+	req.end();
 }
 
 
