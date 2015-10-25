@@ -58,19 +58,27 @@ function recipeProvided(req, res, query) {
 		console.log(recipes);
 		var recipeList = [];
 		var calorieCount = [];
+		var urlList = [];
 		for(var i = 0; i < recipes.hits.length; i += 1) {
 			var individualRecipe = recipes.hits[i];
 			var recipeInfo = individualRecipe.recipe.label;
+			var urlTemp = individualRecipe.recipe.url;
 			calorieCount.push(individualRecipe.recipe.calories);
+			urlList.push(urlTemp)
 			recipeList.push(recipeInfo);
 			
 		};
 		console.log(recipeList);
 		console.log(calorieCount);
 
+		var returnObj = {
+			'calCount': Math.floor(calorieCount[0]),
+			'recipeName': recipeList[0],
+			'url': urlList[0]
+		}
 		
 		
-		res.end(JSON.stringify(recipes));
+		res.end(JSON.stringify(returnObj));
 	});
 }
 
