@@ -26,6 +26,7 @@
 	height: 100%;
 	margin-top: 0%;
 	position: fixed;
+	overflow: scroll;
 }
 
 .recipe{
@@ -41,7 +42,8 @@
 		color: white;
 	}
 	#style2{
-		background: white;
+		background: #24992e;
+		color: white;
 	}
 	.recipeName{
 		float: left;
@@ -62,7 +64,8 @@
 }
 
 .activeRecipe{
-	background: #222222 !important;
+	background: #589ae9 !important;
+	opacity: 0.8 !important;
 }
 
 .activeArrow{
