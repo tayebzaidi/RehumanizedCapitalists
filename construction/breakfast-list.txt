@@ -1,0 +1,19 @@
+toast 
+bagel 
+muffins 
+french toast 
+pancakes 
+waffles 
+sausage 
+granola 
+oatmeal 
+cereal bars 
+string cheese 
+yogurt 
+smoothie 
+sandwich 
+ham 
+donuts 
+biscuits 
+milk 
+juice

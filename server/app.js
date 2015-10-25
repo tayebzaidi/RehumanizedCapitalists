@@ -5,10 +5,26 @@ var http 	= require('http');
 var url = require('url');
 var fs = require('fs');
 var util = require('util');
+var exampleItemLists = [];
+populateExampleItemLists();
+console.log(exampleItemLists[1]);
 
 var server = http.createServer(requestHandler);
 server.listen(1337);
 console.log("Server Deployed.");
+
+function populateExampleItemLists() {
+	var filenames = ['breakfast-list.txt', 'dinner-list.txt', 'dessert-list.txt'];
+	for(var index in filenames) {
+		var items =  fs.readFileSync('../construction/' + filenames[index]).toString().split('\r\n');
+		var list = [];
+		for(var i2 in items) {
+			list.push(items[i2].replace(/^\s+|\s+$/g, ''));
+		}
+		exampleItemLists.push(list);
+	}
+}
+
 
 //Main Request Handler
 function requestHandler(req, res) {
@@ -76,7 +92,6 @@ function requestRecipes(recipe, healthReqs ,callback) {
 		res.on("end", function(chunk) {
 			console.log("Request complete.");
 			var obj = JSON.parse(recipes);
-			console.log(obj);
 			callback(obj);
 		});
 	});
