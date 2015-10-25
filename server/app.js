@@ -91,13 +91,14 @@ function recipeNotProvided(req, res, query) {
 function requestRecipes(recipe, healthReqs ,callback) {
 	console.log(recipe);
 	console.log(typeof(recipe));
-	var numReqs = healthReqs.length;
+	var numReqs = healthReqs.split(' ').length;
 	var craftQuery = '';
+	var healthList = healthReqs.split(' ');
 	for(var i = 0; i < numReqs; i += 1) {
-		craftQuery += '&health=' + healthReqs[i] 
+		craftQuery += '&health=' + healthList[i]; 
 	};
 	console.log(craftQuery);
-	var parameters = util.format("?q=%s", recipe);
+	var parameters = util.format("?q=%s" + craftQuery, recipe);
 	
 	var encParameters = encodeURI(parameters);
 	console.log(encParameters);
