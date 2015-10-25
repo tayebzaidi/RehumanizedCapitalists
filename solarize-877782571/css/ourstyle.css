@@ -129,28 +129,20 @@
 
 /*Sidebars*/
 
-.rightBar{
-	height: 100%;
-	width: 24%;
-	position: fixed;
-	background-color: #909090;
-	right: 0%;
-	float: right;	
-}
 
 .ingredients-box{
 	position: fixed;
-	width: 80%;
+	width: 105%;
 	height: 100%;
 	text-align: center;
 	border-right: black 5px solid;
-	left: -4%;
-	
+	border-left: black 5px solid;
+	left: -3%;
 }
 
 .ingredients-header{
 	height: 52px;
-	background-color: #909090;
+	background-color: #82b440;
 	border-bottom: 1 px solid #636366;
 	text-align: center;
 	font-size: 30px;
@@ -183,30 +175,6 @@
 	height: 13%;
 }
 
-.send-button{
-	text-align: center;
-	background-color: #85ADFF;
-	height: 100%;
-	width: 13.5%;
-	float: right;
-	padding-top: 4%;
-	cursor: pointer;
-}
-
-.rightBar ul{
-  border-top: 1px solid #636366;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.rightBar li{
-  border-bottom: 1px solid #636366;
-  line-height: 45px;
-  padding-bottom: 3px;
-  padding-right: 20px;
-  padding-top: 3px;
-}
 
 .recipe{
 	background-color: #85ADFF;
@@ -218,5 +186,10 @@
 	width: 111.5%;
 }
 
+#recipeDump{
+	width: 80%;
+	height: 80%;
+	border: 2px solid #82b440;
+}
 
 >>>>>>> 5527f81bd817ff01210cce5e46ec4f7e5e0c3461

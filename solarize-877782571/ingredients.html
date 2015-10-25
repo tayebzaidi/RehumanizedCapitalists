@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Recipes</title>
+		<title>Ingredients</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />				
 		<script src="js/jquery.min.js"></script>
 		<script src="js/jquery.dropotron.min.js"></script>
@@ -11,8 +11,16 @@
 		<script src="js/init.js"></script>
 		<script src="js/jquery-small.js"></script>
 		<script src="js/recipes.js"></script>
-		<link rel="stylesheet" href="css/skel.css"/>
-		<link rel="stylesheet" href="css/style.css"/>
+		<script language="javascript">
+			var ingredients = [];
+			function formResults(){
+				var ingredientSpace = document.getElementById("ingredientSpace");
+				var ingredient = document.getElementById("ingredientInputBox");
+				ingredients.push(ingredient.value);
+				ingredientSpace.innerHTML += "<div>" + ingredient.value + "</div>";
+				document.getElementById("ingredientInputBox").value = "";
+			}
+		</script>
 		<link rel="stylesheet" href="css/ourstyle.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	</head>
@@ -36,25 +44,15 @@
 				<div class="ingredients-header">
 					<p>Your current ingredients:</p>
 				</div>
-				<div class="ingredients">
+				<div class="ingredients" id="ingredientSpace">
 				</div>
 				<div class="gather">
-						<div class="message">
-							<form>
-								<input type="text" name="message">
-						</div>
-						<div class="send-button" type="submit">
-							Send
-						</div>
+					<form name="ingredients" method="GET">
+						<input type="text" name="inputbox" class="form-control" placeholder="Enter your ingredients here" id="ingredientInputBox"/>
+						<input type="button" class="btn btn-primary" onclick="formResults()" value="Add" />
+						<input type="button" class="btn btn-primary" href="recipe.html" value="Next"/>
 					</form>
 				</div>
-			</div>
-			<div class="rightBar">
-				<ul>
-					<li class="recipe">Recipe 1</li>
-					<li class="recipe">Recipe 2</li>
-					<li class="recipe">Recipe 3</li>
-				</ul>
 			</div>
 		</div>
 	</body>
