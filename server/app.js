@@ -38,7 +38,7 @@ function handleApiRequest(req, res) {
 		var url_parts = url.parse(req.url, true);
 		var query = url_parts.query;
 		console.log(query);
-		if(query.recipe == undefined) {
+		if(query.recipe == undefined || query.healthReqs == undefined) {
 			replyMissingRecipe(res);
 			return;
 		}
@@ -49,11 +49,14 @@ function handleApiRequest(req, res) {
 			for(var i = 0; i < recipes.hits.length; i += 1) {
 				var individualRecipe = recipes.hits[i];
 				var recipeInfo = individualRecipe.recipe.label;
-				calorieCount.push(individualRecipe.calorie)
+				calorieCount.push(individualRecipe.recipe.calories);
 				recipeList.push(recipeInfo);
 				
 			};
 			console.log(recipeList);
+			console.log(calorieCount);
+			
+			
 			res.end(JSON.stringify(recipes));
 		});
 	} else {
@@ -61,11 +64,17 @@ function handleApiRequest(req, res) {
 	}
 }
 
-function requestRecipes(recipe, callback) {
+function requestRecipes(recipe, healthReqs ,callback) {
 	console.log(recipe);
 	console.log(typeof(recipe));
-	
+	var numReqs = healthReqs.length;
+	var craftQuery = '';
+	for(var i = 0; i < numReqs; i += 1) {
+		craftQuery += '&health=' + healthReqs[i] 
+	};
+	console.log(craftQuery);
 	var parameters = util.format("?q=%s", recipe);
+	
 	var encParameters = encodeURI(parameters);
 	console.log(encParameters);
 	var options = {
