@@ -33,10 +33,10 @@ function handleApiRequest(req, res) {
 }
 
 function requestRecipes(req, res, recipe, callback) {
-	var parameters = '?q="chicken duck';
+	var parameters = '?q="chicken duck"&app_id=e830aa3b&app_key=85d44bf24c3f5eaf6248a92872b0e6d6';
 	var options = {
-		host : 'www.thehostwebsite.com', 
-		path : '/apidoodle/' + parameters, 
+		host : 'https://api.edamam.com', 
+		path : '/search' + parameters, 
 		method : 'GET'
 	};
 	
