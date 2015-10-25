@@ -20,3 +20,29 @@
 	background: #222222;
 	height:100%;
 }
+
+.recipe-holder{
+	width: 100%;
+	height: 100%;
+	margin-top: 0%;
+	position: fixed;
+}
+
+.recipe{
+	width: 100%;
+	height: 9%;
+	position: relative;
+	text-align: center;
+	border-bottom: 3px solid black;
+	
+}
+	.recipe.style1{
+		background: #222222;
+	}
+	.recipe.style2{
+		background: white;
+	}
+	.recipe h2{
+		float: left;
+	}
+
