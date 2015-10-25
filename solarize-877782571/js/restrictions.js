@@ -18,7 +18,7 @@ $(document).ready(function(){
 });
 
 function submitRestrictions() {
-    var url = "recipes.html?" + encodeURIComponent(restrictions);
+    var url = "ingredients.html?" + encodeURIComponent(restrictions);
     console.log(url);
     document.location.href = url;
 }   

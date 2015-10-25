@@ -1,7 +1,7 @@
 .restrictions{
 	width: auto;
 	height: auto;
-	#background: white;
+	//background: white;
 	margin-top: 5%;
 	padding-top: 5px;
 	text-align: center;
@@ -32,28 +32,30 @@
 .recipe{
 	width: 100%;
 	height: 9%;
-	position: relative;
+        font-size: 9%;
+	//position: relative;
 	text-align: center;
 	border-bottom: 3px solid black;
 	cursor: pointer;
+        float: left;
 }
-	#style1{
-		background: #82b440;
-		color: white;
-	}
-	#style2{
-		background: #24992e;
-		color: white;
-	}
-	.recipeName{
-		float: left;
-	}
-	.calories{
-		float: left;
-	}
-	.price{
-		float: right;
-	}
+#style1{
+        background: #82b440;
+        color: white;
+}
+#style2{
+        background: #24992e;
+        color: white;
+}
+.recipeName{
+        float: left;
+}
+.calories{
+        float: left;
+}
+.price{
+        float: right;
+}
 
 .arrow{
 	padding-top: 4px;
