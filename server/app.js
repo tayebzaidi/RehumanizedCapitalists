@@ -37,48 +37,54 @@ function requestHandler(req, res) {
 function handleApiRequest(req, res) {
 	console.log("Made it to API Request Handler!")
 	if(req.method == "GET") {
-
+		var url_parts = url.parse(req.url, true);
+		var query = url_parts.query;
 		if(query.random == undefined || query.random == false) {
-			var url_parts = url.parse(req.url, true);
-			var query = url_parts.query;
-			console.log(query);
-			if(query.recipe == undefined || query.healthReqs == undefined) {
-				replyMissingRecipe(res);
-				return;
-			}
-			requestRecipes(query.recipe, query.healthReqs, function(recipes) {
-				console.log(recipes);
-				var recipeList = [];
-				var calorieCount = [];
-				for(var i = 0; i < recipes.hits.length; i += 1) {
-					var individualRecipe = recipes.hits[i];
-					var recipeInfo = individualRecipe.recipe.label;
-					calorieCount.push(individualRecipe.recipe.calories);
-					recipeList.push(recipeInfo);
-					
-				};
-				console.log(recipeList);
-				console.log(calorieCount);
-
-				
-				
-				res.end(JSON.stringify(recipes));
-			});
+			recipeProvided(req, res, query);
 		} else {
-			var random = query.random;
-			if(random == "breakfast" || random == 0) {
-				
-			} else if(random == "dinner" || random == 1) {
-				
-			} else if(random == "dessert" || random == 2) {
-				
-			} else {
-				replyInvalidRandom(res);
-				return;
-			}
+			recipeNotProvided(req, res, query);
 		}
 	} else {
 		replyPostNotSupported(res);
+	}
+}
+
+function recipeProvided(req, res, query) {
+	if(query.recipe == undefined || query.healthReqs == undefined) {
+		replyMissingRecipe(res);
+		return;
+	}
+	requestRecipes(query.recipe, query.healthReqs, function(recipes) {
+		console.log(recipes);
+		var recipeList = [];
+		var calorieCount = [];
+		for(var i = 0; i < recipes.hits.length; i += 1) {
+			var individualRecipe = recipes.hits[i];
+			var recipeInfo = individualRecipe.recipe.label;
+			calorieCount.push(individualRecipe.recipe.calories);
+			recipeList.push(recipeInfo);
+			
+		};
+		console.log(recipeList);
+		console.log(calorieCount);
+
+		
+		
+		res.end(JSON.stringify(recipes));
+	});
+}
+
+function recipeNotProvided(req, res, query) {
+	var random = query.random;
+	if(random == "breakfast" || random == 0) {
+		
+	} else if(random == "dinner" || random == 1) {
+		
+	} else if(random == "dessert" || random == 2) {
+		
+	} else {
+		replyInvalidRandom(res);
+		return;
 	}
 }
 
