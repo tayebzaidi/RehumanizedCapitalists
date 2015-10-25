@@ -27,7 +27,8 @@ function handleApiRequest(req, res) {
 			return;
 		}
 		requestRecipes(query.recipe, function(recipes) {
-			res.end(recipes);
+			console.log(recipes);
+			res.end(JSON.stringify(recipes));
 		});
 	} else {
 		replyPostNotSupported(res);
@@ -46,18 +47,20 @@ function requestRecipes(recipe, callback) {
 	var req = http.request(options, function(res) {
 		console.log("STATUS: " + res.statusCode);
 		console.log("HEADERS: " + JSON.stringify(res.headers));
-		var recipes
+		var recipes = "";
 		res.on("data", function(chunk) {
 			recipes += chunk;
 		});
 		res.on("end", function(chunk) {
-			callback(recipes);
+			console.log("Request complete.");
+			var obj = JSON.parse(recipes);
+			console.log(obj);
+			callback(obj);
 		});
-		//callback("Dog");
 	});
 	
 	req.on("error", function(chunk) {
-		return "error";
+		return null;
 	});
 	
 	console.log("Ending request for data...");
@@ -65,6 +68,10 @@ function requestRecipes(recipe, callback) {
 }
 
 
+function replyInternalServerError(res){
+	res.writeHead(500,  {'Content-Type' : 'text/json'});
+	res.end('{"message" : "internal server error"}');
+}
 function replyMissingRecipe(res) {
 	res.writeHead(400, {'Content-Type' : 'text/json'});
 	res.end('{"message" : "no recipe given"}');
