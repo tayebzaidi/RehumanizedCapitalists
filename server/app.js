@@ -26,6 +26,8 @@ function populateExampleItemLists() {
 }
 
 
+
+
 //Main Request Handler
 function requestHandler(req, res) {
 	console.log("Request recieved.");
@@ -35,6 +37,7 @@ function requestHandler(req, res) {
 function handleApiRequest(req, res) {
 	console.log("Made it to API Request Handler!")
 	if(req.method == "GET") {
+<<<<<<< HEAD
 		var url_parts = url.parse(req.url, true);
 		var query = url_parts.query;
 		console.log(query);
@@ -51,14 +54,46 @@ function handleApiRequest(req, res) {
 				var recipeInfo = individualRecipe.recipe.label;
 				calorieCount.push(individualRecipe.recipe.calories);
 				recipeList.push(recipeInfo);
+=======
+		if(query.random == undefined || query.random == false) {
+			var url_parts = url.parse(req.url, true);
+			var query = url_parts.query;
+			console.log(query);
+			if(query.recipe == undefined || query.healthReqs == undefined) {
+				replyMissingRecipe(res);
+				return;
+			}
+			requestRecipes(query.recipe, function(recipes) {
+				console.log(recipes);
+				var recipeList = [];
+				var calorieCount = [];
+				for(var i = 0; i < recipes.hits.length; i += 1) {
+					var individualRecipe = recipes.hits[i];
+					var recipeInfo = individualRecipe.recipe.label;
+					calorieCount.push(individualRecipe.recipe.calories);
+					recipeList.push(recipeInfo);
+					
+				};
+				console.log(recipeList);
+				console.log(calorieCount);
+>>>>>>> 4dff13df521bf21809d6ee5c44866b6a9823bc12
 				
-			};
-			console.log(recipeList);
-			console.log(calorieCount);
-			
-			
-			res.end(JSON.stringify(recipes));
-		});
+				
+				res.end(JSON.stringify(recipes));
+			});
+		} else {
+			var random = query.random;
+			if(random == "breakfast" || random == 0) {
+				
+			} else if(random == "dinner" || random == 1) {
+				
+			} else if(random == "dessert" || random == 2) {
+				
+			} else {
+				replyInvalidRandom(res);
+				return;
+			}
+		}
 	} else {
 		replyPostNotSupported(res);
 	}
@@ -121,4 +156,8 @@ function replyTestSuccess(res) {
 function replyPostNotSupported(res) {
 	res.writeHead(405, {'Content-Type' : 'text/json'});
 	res.end('{"message":"POST not supported"}');
+}
+function replyInvalidRandom(res) {
+	res.writeHead(400, {'Content-Type' : 'text/json'});
+	res.end('{"message" : "invalid random meal"}');
 }
