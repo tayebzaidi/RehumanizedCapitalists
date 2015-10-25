@@ -10,6 +10,49 @@
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
 		<script src="js/restrictions.js"></script>
+                <script type="text/javascript"> 
+                        function replaceAll(find, replace, str) {
+                            return str.replace(new RegExp(find, 'g'), replace);
+                          }
+                        function getUrlVars() {
+                            var vars = {};
+                            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                            vars[key] = value;
+                            });
+                            return vars;
+                        }
+                        var urlVars = getUrlVars();
+                        console.log(urlVars);
+                        var ingredients = JSON.parse(replaceAll('%22','"',urlVars.ingredients));
+                        var healthRequirements = JSON.parse(replaceAll('%22', '"', urlVars.health));
+                        
+                        
+                        var ingredientsString = "";
+                       for(var i in ingredients) {
+                           ingredientsString += " " + ingredients[i];
+                       }
+                       ingredientsString = ingredientsString.substring(1, ingredientsString.length);
+                       var healthReqsString = "";
+                       for(var i in healthRequirements) {
+                           healthReqsString += " " + healthRequirements[i];
+                       }
+                       healthReqsString = healthReqsString.substring(1, healthReqsString.length);
+                        function loginSuccess(data) {
+                            console.log(data);
+							var dat = data;
+							document.getElementById('recipeDump').innerHTML += "<h2>Your Recipe: <a href='" + data.url +"'>" + data.url + "</a></h2>";
+                        }
+                        $.ajax({    
+                            type: "GET", 
+                            url: "/EatEasy/node",
+                            data : {
+                                'recipe' : ingredientsString,
+                                'healthReqs' : healthReqsString
+                            },
+                            dataType: "json",
+                            success: loginSuccess
+                        });
+                </script>
 		<link rel="stylesheet" href="css/ourstyle.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	</head>

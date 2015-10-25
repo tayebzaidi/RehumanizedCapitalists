@@ -28,19 +28,20 @@
                         var index = url.indexOf("health=") + "health=".length;
                         console.log(replaceAll('%22','"', url.substring(index, url.length)));
                         var healthRestrictions = JSON.parse(replaceAll('%22','"', url.substring(index, url.length)));
-                        console.log(urlVars);
+                       // console.log(urlVars);
                         
 			var ingredients = [];
 			function formResults(){
 				var ingredientSpace = document.getElementById("ingredientSpace");
 				var ingredient = document.getElementById("ingredientInputBox");
+                                console.log(ingredients);
 				ingredients.push(ingredient.value);
 				ingredientSpace.innerHTML += "<div>" + ingredient.value + "</div>";
 				document.getElementById("ingredientInputBox").value = "";
 			}
                         
                         function next() {
-                            var url = "recipe.html?" + "health=" + JSON.stringify(healthRestrictions) +  "&" + JSON.stringify(ingredients);
+                            var url = "recipe.html?" + "health=" + JSON.stringify(healthRestrictions) +  "&ingredients=" + JSON.stringify(ingredients);
                             console.log(url);
                             document.location.href = url;
                         }
@@ -74,7 +75,7 @@
 					<form name="ingredients" method="GET">
 						<input type="text" name="inputbox" class="form-control" placeholder="Enter your ingredients here" id="ingredientInputBox"/>
 						<input type="button" class="btn btn-primary" onclick="formResults()" value="Add" />
-						<input type="button" class="btn btn-primary" href="recipe.html" value="Next"/>
+						<input type="button" class="btn btn-primary" onclick="next()" value="Next"/>
 					</form>
 				</div>
 			</div>
