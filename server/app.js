@@ -26,21 +26,24 @@ function handleApiRequest(req, res) {
 			replyMissingRecipe(res);
 			return;
 		}
-		requestRecipes(req, res, query);
+		requestRecipes(query.recipe, function(recipes) {
+			
+		});
 	} else {
 		replyPostNotSupported(res);
 	}
 }
 
-function requestRecipes(req, res, recipe, callback) {
-	var parameters = '?q="chicken duck"&app_id=e830aa3b&app_key=85d44bf24c3f5eaf6248a92872b0e6d6';
+function requestRecipes(recipe, callback) {
+	var parameters = util.format("?q='%s'&app_id=e830aa3b&"
+			+ "app_key=85d44bf24c3f5eaf6248a92872b0e6d6", recipe);
 	var options = {
 		host : 'https://api.edamam.com', 
 		path : '/search' + parameters, 
 		method : 'GET'
 	};
 	
-	http.request(options, function(response) {
+	var req = http.request(options, function(response) {
 		
 	});
 }
