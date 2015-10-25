@@ -3,7 +3,6 @@ console.log("Deloying EatEasy server...");
 //Load Dependencies
 var http 	= require('http');
 var url = require('url');
-var querystring = require('querystring');
 var fs = require('fs');
 var util = require('util');
 
@@ -29,7 +28,16 @@ function handleApiRequest(req, res) {
 		}
 		requestRecipes(query.recipe, function(recipes) {
 			console.log(recipes);
-			console.log(recipes.count)
+			var recipeList = [];
+			var calorieCount = [];
+			for(var i = 0; i < recipes.hits.length; i += 1) {
+				var individualRecipe = recipes.hits[i];
+				var recipeInfo = individualRecipe.recipe.label;
+				calorieCount.push(individualRecipe.calorie)
+				recipeList.push(recipeInfo);
+				
+			};
+			console.log(recipeList);
 			res.end(JSON.stringify(recipes));
 		});
 	} else {
@@ -42,8 +50,8 @@ function requestRecipes(recipe, callback) {
 	console.log(typeof(recipe));
 	
 	var parameters = util.format("?q=%s", recipe);
-	encParameters = encodeURI(parameters)
-	console.log(encParameters)
+	var encParameters = encodeURI(parameters);
+	console.log(encParameters);
 	var options = {
 		host : 'api.edamam.com', 
 		path : '/search' + encParameters, 
