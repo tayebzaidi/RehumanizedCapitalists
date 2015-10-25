@@ -54,7 +54,6 @@ function requestRecipes(recipe, callback) {
 		res.on("end", function(chunk) {
 			console.log("Request complete.");
 			var obj = JSON.parse(recipes);
-			console.log(obj);
 			callback(obj);
 		});
 	});
